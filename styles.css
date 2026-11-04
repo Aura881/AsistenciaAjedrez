@@ -1,0 +1,365 @@
+/* ============ Taller de Ajedrez · UPMP — Estilo Chess.com ============
+   Paleta oficial dark mode, botones 3D y contenedores elevados. */
+
+:root {
+  /* Paleta Chess.com Dark Mode */
+  --green: #81b64c;
+  --green-hover: #95c85d;
+  --green-shadow: #537133; 
+  
+  --dark-bg: #312e2b;       /* Fondo principal de la app */
+  --surface: #262421;       /* Fondo de tarjetas y paneles */
+  --surface-hover: #3d3a36; /* Hover en listas/tablas */
+  --surface-active: #4a4844;
+  
+  --ink: #ffffff;           /* Texto principal */
+  --ink-2: #c5c5c4;         /* Texto secundario */
+  --muted: #8b8987;         /* Texto apagado */
+  --line: #403d39;          /* Bordes y separadores */
+
+  --board-l: #ebecd0;
+  --board-d: #779556;
+
+  --amber: #f2ca5c;  --amber-bg: #4a3f1d;  --amber-ink: #f2ca5c;
+  --red: #fa412d;    --red-bg: #4a1f1a;    --red-ink: #fa412d;
+  --blue-bg: #1d3a4a; --blue-ink: #6bb0d6;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--dark-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0 0 .5rem; font-weight: 700; color: var(--ink); }
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.02rem; }
+p { margin: 0 0 .75rem; color: var(--ink-2); }
+.muted { color: var(--muted); }
+.hint { font-size: .82rem; color: var(--muted); margin: .85rem 0 0; }
+
+/* ---------- Barra superior ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding: .75rem 1.25rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.brand { display: flex; align-items: center; gap: .7rem; min-width: 0; }
+.brand strong { display: block; font-size: 1rem; font-weight: 800; color: #fff; }
+.brand small { display: none; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+
+.logo {
+  position: relative; overflow: hidden;
+  display: inline-grid; place-items: center;
+  width: 36px; height: 36px; flex: none;
+  font-size: .85rem; font-weight: 800;
+  color: #fff; background: var(--green);
+  border-radius: 8px;
+}
+.logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.logo-lg { width: 72px; height: 72px; font-size: 1.5rem; border-radius: 14px; }
+
+.user-box { display: flex; align-items: center; gap: .5rem; flex: none; }
+.chip {
+  display: none; padding: .3rem .8rem;
+  font-size: .82rem; font-weight: 600;
+  background: var(--surface-hover); color: var(--ink);
+  border-radius: 999px;
+}
+.topbar .btn-ghost { color: var(--muted); border-bottom-width: 0; }
+.topbar .btn-ghost:hover { color: #fff; background: var(--surface-hover); }
+
+/* ---------- Layout ---------- */
+.container { max-width: 1060px; margin: 0 auto; padding: 1.5rem 1rem; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.card h3 { display: flex; align-items: center; gap: .55rem; }
+.card h3::before {
+  content: ""; width: 12px; height: 12px; flex: none;
+  background: var(--green); border-radius: 3px; 
+}
+.panel-head { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 1.25rem; }
+
+/* ---------- Botones (Estilo físico Chess.com) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  padding: .65rem 1.2rem;
+  font: inherit; font-size: .95rem; font-weight: 700;
+  color: var(--ink);
+  background: var(--surface-hover);
+  border: none;
+  border-bottom: 4px solid var(--surface-active);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  transition: all .1s ease;
+}
+.btn:hover { background: var(--surface-active); }
+.btn:active { 
+  border-bottom-width: 0px; 
+  transform: translateY(4px); 
+  margin-bottom: 4px; /* Evita que el layout salte */
+}
+.btn:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+.btn-primary { 
+  color: #fff; 
+  background: var(--green); 
+  border-bottom-color: var(--green-shadow); 
+}
+.btn-primary:hover { background: var(--green-hover); }
+
+.btn-ghost { background: transparent; border-bottom: none; box-shadow: none; }
+.btn-ghost:active { transform: translateY(2px); margin-bottom: 0; }
+
+.btn-danger { color: #fff; background: var(--red); border-bottom-color: #9c2316; }
+.btn-sm { padding: .4rem .7rem; font-size: .8rem; border-bottom-width: 3px; }
+.btn-sm:active { transform: translateY(3px); margin-bottom: 3px; }
+.btn-block { width: 100%; padding: .85rem 1rem; font-size: 1.05rem; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; pointer-events: none; }
+
+/* ---------- Formularios ---------- */
+.form { display: grid; gap: 1rem; }
+label { display: grid; gap: .4rem; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
+input, select {
+  width: 100%; padding: .75rem .9rem;
+  font: inherit; font-size: .95rem; color: #fff;
+  background: rgba(0,0,0,0.2); /* Fondo oscuro para inputs */
+  border: 1px solid var(--line); 
+  border-radius: var(--radius-sm);
+  transition: border-color .15s, box-shadow .15s;
+}
+input::placeholder { color: var(--muted); }
+input:focus, select:focus { 
+  border-color: var(--green); 
+  box-shadow: 0 0 0 3px rgba(129, 182, 76, .2); 
+  outline: none;
+}
+.inline-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; margin-top: 1rem; }
+.inline-form label { flex: 1 1 160px; }
+
+/* ---------- Auth ---------- */
+/* 1. Fondo liso (elimina el repeating-conic-gradient) */
+.auth-view {
+  display: grid; place-items: center;
+  min-height: calc(100vh - 4rem);
+  margin: -1.5rem -1rem; padding: 1rem;
+  background: var(--dark-bg); /* Color sólido oscuro */
+}
+
+/* 2. Definición de animaciones suaves */
+@keyframes fadeSlideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(12px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 3. Transiciones al cambiar de vista (Login -> Dashboard) */
+.view:not([hidden]) {
+  animation: fadeSlideUp 0.35s ease-out forwards;
+}
+
+/* 4. Efecto de aparición con ligero rebote para el Modal */
+.modal:not([hidden]) .modal-box {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+}
+
+/* 5. Transición suave para las pestañas (Tabs) */
+.tab {
+  transition: all 0.2s ease-in-out;
+}
+.auth-card {
+  width: 100%; max-width: 420px;
+  padding: 2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.auth-hero { text-align: center; margin-bottom: 1.5rem; }
+.auth-hero h1 { margin: 1rem 0 .25rem; }
+.auth-hero p { color: var(--ink-2); font-size: .9rem; margin: 0; }
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: flex; gap: .4rem; margin-bottom: 1.25rem; padding: .35rem;
+  background: rgba(0,0,0,0.2); 
+  border: 1px solid var(--line); border-radius: 10px;
+}
+.tabs-scroll { overflow-x: auto; scrollbar-width: none; }
+.tabs-scroll::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 1 0 auto; padding: .6rem 1rem;
+  font: inherit; font-size: .9rem; font-weight: 700; color: var(--ink-2);
+  background: transparent; border: 0; border-radius: 6px;
+  cursor: pointer; white-space: nowrap;
+  transition: all .15s;
+}
+.tab:hover { color: #fff; background: var(--surface-hover); }
+.tab.active { color: #fff; background: var(--surface-active); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
+/* ---------- KPIs ---------- */
+.kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+.kpi {
+  position: relative; overflow: hidden;
+  padding: 1rem 1rem 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+}
+.kpi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--line); }
+.kpi span { display: block; font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+.kpi b { display: block; margin-top: .25rem; font-size: 2.2rem; font-weight: 800; line-height: 1; color: #fff; }
+.kpi.ok::before { background: var(--green); }
+.kpi.warn::before { background: var(--amber); }
+.kpi.bad::before { background: var(--red); }
+
+/* ---------- Gráfica de barras ---------- */
+.chart { display: grid; gap: .8rem; margin-top: 1rem; }
+.bar-row { display: grid; grid-template-columns: 90px 1fr 45px; align-items: center; gap: .75rem; font-size: .85rem; }
+.bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; color: var(--ink-2); }
+.bar-track { height: 12px; background: rgba(0,0,0,0.3); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--green); border-radius: 999px; transition: width .5s ease; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15); }
+.bar-fill.mid { background: var(--amber); }
+.bar-fill.low { background: var(--red); }
+.bar-pct { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; }
+
+/* ---------- Tablas ---------- */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; background: var(--surface); }
+th, td { padding: .75rem .85rem; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th {
+  font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--muted);
+  background: rgba(0,0,0,0.2);
+}
+tbody tr { transition: background .1s; }
+tbody tr:hover { background: var(--surface-hover); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: center; font-variant-numeric: tabular-nums; }
+.actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+.empty { padding: 2rem; text-align: center; color: var(--muted); font-style: italic; }
+
+/* ---------- Badges ---------- */
+.badge { display: inline-block; padding: .2rem .6rem; font-size: .75rem; font-weight: 700; border-radius: 6px; }
+.badge-ok { background: rgba(129, 182, 76, 0.15); color: var(--green); border: 1px solid rgba(129,182,76,0.3); }
+.badge-warn { background: rgba(242, 202, 92, 0.15); color: var(--amber); border: 1px solid rgba(242,202,92,0.3); }
+.badge-bad { background: rgba(250, 65, 45, 0.15); color: var(--red); border: 1px solid rgba(250,65,45,0.3); }
+.badge-info { background: rgba(107, 176, 214, 0.15); color: var(--blue-ink); border: 1px solid rgba(107,176,214,0.3); }
+.badge-muted { background: var(--surface-hover); color: var(--ink-2); border: 1px solid var(--line); }
+
+/* ---------- Código de clase ---------- */
+.code-display {
+  position: relative; overflow: hidden; text-align: center;
+  padding: 2rem 1rem; margin-bottom: 1rem;
+  background: #1e1c1a; /* Fondo ultra oscuro para resaltar */
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: inset 0 4px 15px rgba(0,0,0,0.3);
+}
+.code-display .countdown { font-size: .95rem; color: var(--muted); }
+.code-display .countdown b { color: var(--ink); font-family: var(--mono); font-size: 1.1rem; }
+.code-display .pin {
+  margin: .5rem 0 1.5rem;
+  font-family: var(--mono);
+  font-size: clamp(3rem, 15vw, 5rem);
+  font-weight: 800; letter-spacing: .25em; padding-left: .25em;
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(129, 182, 76, 0.3);
+}
+.code-display .row { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+.no-code {
+  text-align: center; color: var(--muted); padding: 2rem 1rem;
+  background: rgba(0,0,0,0.2); border: 2px dashed var(--line); border-radius: var(--radius);
+}
+
+.code-form { display: flex; flex-direction: column; gap: .75rem; margin-top: 1rem; }
+.code-form input {
+  text-align: center; font-family: var(--mono);
+  font-size: 2rem; font-weight: 800; letter-spacing: .3em;
+  padding: .75rem;
+}
+
+/* ---------- Modal ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center;
+  background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(3px);
+  padding: 1rem;
+}
+.modal-box {
+  width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto;
+  padding: 1.5rem; background: var(--surface);
+  border: 1px solid var(--line); border-top: 5px solid var(--green);
+  border-radius: var(--radius); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+.modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+.modal-head h3 { margin: 0; font-size: 1.2rem; }
+.modal-close {
+  width: 32px; height: 32px; flex: none; display: grid; place-items: center;
+  font-size: 1.4rem; color: var(--muted); background: transparent; border: 0; border-radius: 8px; cursor: pointer;
+}
+.modal-close:hover { color: #fff; background: var(--surface-hover); }
+.modal-foot { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1.5rem; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 1.5rem; z-index: 99;
+  transform: translate(-50%, 150%);
+  width: max-content; max-width: calc(100vw - 2rem);
+  padding: .85rem 1.25rem; font-size: .95rem; font-weight: 700;
+  color: #fff; background: var(--surface-hover);
+  border-left: 5px solid var(--green); border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.toast.show { transform: translate(-50%, 0); }
+.toast.error { border-left-color: var(--red); }
+
+/* ---------- Responsivo (Tablet / Escritorio) ---------- */
+@media (min-width: 640px) {
+  .topbar { padding: .75rem 2rem; }
+  .brand small { display: block; }
+  .chip { display: inline-block; }
+  .panel-head { flex-direction: row; align-items: center; justify-content: space-between; }
+  .kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .bar-row { grid-template-columns: minmax(110px, 210px) 1fr 46px; font-size: .9rem; }
+  .code-form { flex-direction: row; }
+  .code-form input { flex: 1 1 200px; max-width: 300px; }
+}
